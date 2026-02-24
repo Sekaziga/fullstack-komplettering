@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install backend dependencies
+        working-directory: startkod/api
+        run: npm ci
+
+      - name: Install frontend dependencies
+        working-directory: startkod/frontend
+        run: npm ci
+
+      - name: Test backend
+        working-directory: startkod/api
+        run: npm test
+
+      - name: Test frontend
+        working-directory: startkod/frontend
+        run: npm test
+
+      - name: Build backend
+        working-directory: startkod/api
+        run: |
+          if [ -f package.json ] && grep -q '"build"' package.json; then npm run build; else echo "No build script"; fi
+
+      - name: Build frontend
+        working-directory: startkod/frontend
+        run: npm run build
+
+      - name: Deploy (placeholder)
+        if: ${{ success() }}
+        run: echo "Deploying..."
