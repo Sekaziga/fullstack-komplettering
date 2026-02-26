@@ -9,9 +9,6 @@ export default defineConfig({
   },
   test: {
     setupFiles: 'src/setupTests.js',
-    environment: 'jsdom',
-    deps: {
-      inline: ['html-encoding-sniffer', '@exodus/bytes'],
-    },
+    environment: 'happy-dom',
   },
 });
