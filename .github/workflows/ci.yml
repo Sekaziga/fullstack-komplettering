@@ -16,13 +16,25 @@ jobs:
         with:
           node-version: 18
 
+      - name: Clean backend node_modules and npm cache
+        working-directory: startkod/api
+        run: |
+          rm -rf node_modules package-lock.json
+          npm cache clean --force
+
       - name: Install backend dependencies
         working-directory: startkod/api
-        run: npm ci
+        run: npm install
+
+      - name: Clean frontend node_modules and npm cache
+        working-directory: startkod/frontend
+        run: |
+          rm -rf node_modules package-lock.json
+          npm cache clean --force
 
       - name: Install frontend dependencies
         working-directory: startkod/frontend
-        run: npm ci
+        run: npm install
 
       - name: Test backend
         working-directory: startkod/api

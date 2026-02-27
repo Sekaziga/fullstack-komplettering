@@ -1,5 +1,11 @@
 {
   "devDependencies": {
     "happy-dom": "^20.7.0"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "jsdom": "^28.1.0",
+    "vitest": "^4.0.18"
   }
 }
