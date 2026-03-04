@@ -89,7 +89,9 @@ Frontend: http://localhost:5173 · API: http://localhost:3000
 
 **Mål:** Visa minst en enkel prestandaåtgärd.
 
-- Implementera minst ett av följande: **Caching i appen** (t.ex. HTTP cache-header på en endpoint, eller enkel in-memory/Redis-cache), **färre renderingar i frontend** (t.ex. `React.memo` eller lazy loading), eller **caching i GitHub Actions-workflow** (t.ex. `actions/cache` för node_modules eller Docker-lager så att bygg och deployment går snabbare). Skriv en kort rad i README om vad du gjorde.
+- Jag har lagt till caching av `node_modules` i GitHub Actions-workflowen med `actions/cache` för både backend och frontend. Detta gör att installationen av beroenden går snabbare vid varje build.
+
+- Du kan även välja att implementera någon av de andra alternativen: **Caching i appen** (t.ex. HTTP cache-header på en endpoint, eller enkel in-memory/Redis-cache), **färre renderingar i frontend** (t.ex. `React.memo` eller lazy loading).
 
 ---
 

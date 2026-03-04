@@ -16,6 +16,22 @@ jobs:
         with:
           node-version: 20
 
+      - name: Cache backend node_modules
+        uses: actions/cache@v4
+        with:
+          path: startkod/api/node_modules
+          key: ${{ runner.os }}-api-node-${{ hashFiles('startkod/api/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-api-node-
+
+      - name: Cache frontend node_modules
+        uses: actions/cache@v4
+        with:
+          path: startkod/frontend/node_modules
+          key: ${{ runner.os }}-frontend-node-${{ hashFiles('startkod/frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-frontend-node-
+
       - name: Clean backend node_modules and npm cache
         working-directory: startkod/api
         run: |
