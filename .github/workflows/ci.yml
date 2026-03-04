@@ -67,9 +67,18 @@ jobs:
 
       - name: Build frontend
         working-directory: startkod/frontend
-
         run: npm run build
-  
+
+      - name: Generate OpenAPI spec
+        working-directory: startkod/api
+        run: npm run swagger:export
+
+      - name: Upload OpenAPI artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: openapi
+          path: startkod/api/openapi.json
+
       - name: Deploy (placeholder)
         if: ${{ success() }}
         run: echo "Deploying..."

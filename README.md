@@ -105,10 +105,11 @@ Frontend: http://localhost:5173 · API: http://localhost:3000
 
 ## Steg 8: Automatiserad API-dokumentation
 
+
 **Mål:** API-dokumentation genereras och publiceras via pipelinen.
 
-- I backend: Sätt upp verktyg för att generera OpenAPI/Swagger från koden (t.ex. swagger-jsdoc + ett script som skriver `openapi.json`).
-- Lägg till ett steg i pipelinen som kör detta script och publicerar resultatet (t.ex. till GitHub Pages eller som artefakt). Se till att dokumentationen uppdateras vid varje relevant kodändring.
+- Jag har lagt till automatiserad OpenAPI/Swagger-dokumentation i backend med swagger-jsdoc och swagger-ui-express. Dokumentationen finns på `/api-docs` och exporteras som `openapi.json`.
+- Pipelinen genererar automatiskt `openapi.json` och laddar upp den som artefakt vid varje build, så dokumentationen är alltid uppdaterad.
 
 ---
 
