@@ -99,8 +99,7 @@ Frontend: http://localhost:5173 · API: http://localhost:3000
 
 **Mål:** Ett automatiserat verktyg för kodgranskning eller säkerhet i pipelinen.
 
-- Lägg till **CodeQL** (GitHub Actions) eller **Snyk** (eller liknande) i din CI-workflow. Steget ska köras efter checkout/install, t.ex. före eller efter testerna. Följ respektive tjänsts guide för GitHub Actions.
-- Verifiera i Actions att steget körs. Kort beskrivning i README eller i reflektionen räcker.
+- Jag har lagt till **CodeQL** (GitHub Actions) i CI-workflowen. CodeQL analyserar koden automatiskt vid varje push och pull request för att hitta sårbarheter och säkerhetsproblem.
 
 ---
 
