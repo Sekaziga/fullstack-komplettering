@@ -130,3 +130,38 @@ Frontend: http://localhost:5173 · API: http://localhost:3000
 
 - **Repo:** Länk till GitHub-repo med README, Dockerfile(s), `docker-compose.yml`, pipeline-filer och kod. Inga lösenord eller API-nycklar i koden – använd secrets/miljövariabler.
 - **Reflektion:** Lämna in enligt vad utbildaren anger (t.ex. fil i repo eller i lärplattformen).
+
+---
+
+## 🪵 How to View Logs & Debug
+
+### Backend Logs (Render)
+1. Go to [render.com](https://render.com) and log in
+2. Click on your service **fullstack-komplettering**
+3. Click **"Logs"** in the left sidebar
+4. You will see all `console.log()` outputs in real time
+
+Common things to look for:
+- `API lyssnar på 0.0.0.0:10000` → server started correctly ✅
+- Red error messages → copy and Google the error
+
+### Frontend Logs (Vercel)
+1. Go to [vercel.com](https://vercel.com) and log in
+2. Click your project **fullstack-komplettering**
+3. Click **"Deployments"** tab
+4. Click the latest deployment → **"Build Logs"**
+
+### Browser DevTools (fastest way to debug)
+1. Open your Vercel URL in Chrome
+2. Press `Cmd + Option + I` (Mac) or `F12` (Windows)
+3. **Console tab** → shows frontend errors
+4. **Network tab** → shows if API calls are failing
+
+### Common Issues & Fixes
+
+| Problem | Where to look | Fix |
+|---|---|---|
+| App not loading | Render logs | Check PORT environment variable |
+| API not responding | Render logs | Look for red error messages |
+| Frontend blank page | Vercel build logs | Check build command and output directory |
+| CORS error | Browser Console | Add Vercel URL to CORS in backend |
