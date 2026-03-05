@@ -167,3 +167,96 @@ Common things to look for:
 | API not responding | Render logs | Look for red error messages |
 | Frontend blank page | Vercel build logs | Check build command and output directory |
 | CORS error | Browser Console | Add Vercel URL to CORS in backend |
+
+---
+
+## 🏁 Hur man kör projektet lokalt
+
+1. Klona detta repo och gå till mappen `startkod`.
+2. Kör `docker-compose up` i terminalen (kräver Docker installerat).
+3. Frontend nås på http://localhost:5173 och API på http://localhost:3000.
+
+### Tjänster
+- **api**: Express-backend (Node.js)
+- **frontend**: React-app (Vite)
+
+### Driftsatta URL:er
+- **Frontend:** https://fullstack-komplettering-frontend.vercel.app
+- **API:** https://fullstack-komplettering-api.onrender.com
+
+### Kort om pipeline (CI/CD)
+- **Trigger:** Vid push till `main`-branchen (och Pull Request)
+- **Steg:**
+  1. Checka ut kod
+  2. Installera beroenden för frontend och backend
+  3. Kör tester (`npm test`)
+  4. Bygg projektet
+  5. Generera och exportera API-dokumentation
+  6. Deploy sker **endast** om alla tester är godkända
+- **Deploy:**
+  - Backend deployas till Render
+  - Frontend deployas till Vercel
+
+---
+
+## Reflektion
+
+1. **Varför Docker och två tjänster?**
+   Docker och docker-compose gör det enkelt att köra och paketera både frontend och backend i separata, isolerade miljöer. Det ger samma miljö lokalt och i produktion, minskar "it works on my machine"-problem och gör det lättare att skala eller byta ut delar. Två tjänster (frontend + API) ger tydlig separation av ansvar, bättre säkerhet och flexibilitet (t.ex. kan frontend och backend uppdateras oberoende).
+
+2. **Vad händer i CI/CD-pipelinen?**
+   När jag pushar kod körs pipelinen automatiskt: koden checkas ut, beroenden installeras, tester körs och projektet byggs. Deploy sker bara om alla tester är gröna, vilket minskar risken att trasig kod hamnar i produktion. Det ger snabb feedback och tryggare leverans.
+
+3. **Loggning och övervakning?**
+   Jag har lagt till loggutskrifter i backend (t.ex. vid start och fel). Vid problem kan jag se loggar i Render (backend) och Vercel (frontend). Om något går fel kan jag snabbt hitta felmeddelanden och spåra buggar. Jag har även en health check-endpoint (`/health`) för att enkelt kolla om API:et är igång.
+
+4. **Prestandaåtgärd?**
+   Jag valde att cacha `node_modules` i GitHub Actions-workflowen med `actions/cache` för både backend och frontend. Det gör att installationen av beroenden går snabbare vid varje build, vilket sparar tid och resurser i pipelinen.
+
+5. **AI-/säkerhetsverktyg i pipelinen?**
+   Jag använder CodeQL i pipelinen. Det analyserar koden automatiskt för att hitta sårbarheter och säkerhetsproblem. Fördel: upptäcker problem tidigt. Nackdel: ibland falska positiva varningar eller att det inte hittar alla typer av problem.
+
+6. **Automatisk API-dokumentation?**
+   Genom att generera och publicera API-dokumentationen automatiskt i pipelinen är den alltid uppdaterad och korrekt. Det minskar risken för fel, sparar tid och gör det lättare för andra att använda API:et. Man slipper manuellt underhåll och dokumentationen följer alltid koden.
+
+---
+
+## Inlämning
+
+- **Repo:** Länk till GitHub-repo med README, Dockerfile(s), `docker-compose.yml`, pipeline-filer och kod. Inga lösenord eller API-nycklar i koden – använd secrets/miljövariabler.
+- **Reflektion:** Lämna in enligt vad utbildaren anger (t.ex. fil i repo eller i lärplattformen).
+
+---
+
+## 🪵 How to View Logs & Debug
+
+### Backend Logs (Render)
+1. Go to [render.com](https://render.com) and log in
+2. Click on your service **fullstack-komplettering**
+3. Click **"Logs"** in the left sidebar
+4. You will see all `console.log()` outputs in real time
+
+Common things to look for:
+- `API lyssnar på 0.0.0.0:10000` → server started correctly ✅
+- Red error messages → copy and Google the error
+
+### Frontend Logs (Vercel)
+1. Go to [vercel.com](https://vercel.com) and log in
+2. Click your project **fullstack-komplettering**
+3. Click **"Deployments"** tab
+4. Click the latest deployment → **"Build Logs"**
+
+### Browser DevTools (fastest way to debug)
+1. Open your Vercel URL in Chrome
+2. Press `Cmd + Option + I` (Mac) or `F12` (Windows)
+3. **Console tab** → shows frontend errors
+4. **Network tab** → shows if API calls are failing
+
+### Common Issues & Fixes
+
+| Problem | Where to look | Fix |
+|---|---|---|
+| App not loading | Render logs | Check PORT environment variable |
+| API not responding | Render logs | Look for red error messages |
+| Frontend blank page | Vercel build logs | Check build command and output directory |
+| CORS error | Browser Console | Add Vercel URL to CORS in backend |
