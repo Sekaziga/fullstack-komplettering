@@ -8,7 +8,7 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-describe('GET /health', () => {
+describe('GET /healt', () => {
   it('should return 200 and status ok', async () => {
     const res = await request(app).get('/health');
     expect(res.statusCode).toBe(200);
