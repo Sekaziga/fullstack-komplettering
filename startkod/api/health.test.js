@@ -11,11 +11,7 @@ app.get('/health', (req, res) => {
 describe('GET /health', () => {
   it('should return 200 and status ok', async () => {
     const res = await request(app).get('/health');
-    
-    // ❌ FORCING FAILURE: Expecting 500 but the app returns 200
-    expect(res.statusCode).toBe(500); 
-    
-    // You can also break the body check:
-    // expect(res.body.status).toBe('broken');
+    expect(res.statusCode).toBe(200);
+    expect(res.body.status).toBe('ok');
   });
 });
