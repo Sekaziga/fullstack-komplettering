@@ -8,10 +8,14 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-describe('GET /healt', () => {
+describe('GET /health', () => {
   it('should return 200 and status ok', async () => {
     const res = await request(app).get('/health');
-    expect(res.statusCode).toBe(200);
-    expect(res.body.status).toBe('ok');
+    
+    // ❌ FORCING FAILURE: Expecting 500 but the app returns 200
+    expect(res.statusCode).toBe(500); 
+    
+    // You can also break the body check:
+    // expect(res.body.status).toBe('broken');
   });
 });
