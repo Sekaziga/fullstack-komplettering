@@ -181,8 +181,8 @@ Common things to look for:
 - **frontend**: React-app (Vite)
 
 ### Driftsatta URL:er
-- **Frontend:** https://fullstack-komplettering-frontend.vercel.app
-- **API:** https://fullstack-komplettering-api.onrender.com
+- **Frontend:** https://fullstack-komplettering.vercel.app
+- **API:** https://fullstack-komplettering.onrender.com
 
 ### Kort om pipeline (CI/CD)
 - **Trigger:** Vid push till `main`-branchen (och Pull Request)
